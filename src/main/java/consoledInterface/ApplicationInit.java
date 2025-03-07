@@ -84,7 +84,7 @@ public class ApplicationInit extends Application {
         theStage.close();
 
         Platform.exit();
-        //System.exit(0);
+        System.exit(130);
     }
 
     private static void interruptAllExecutorServices() {
