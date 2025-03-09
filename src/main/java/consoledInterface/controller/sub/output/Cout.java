@@ -5,7 +5,7 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Cout {
     public static OutputController outputController;
@@ -39,14 +39,14 @@ public class Cout {
         });
     }
 
-    public static void cout(ArrayList<Text> texts) {
+    public static void cout(Text... texts) {
         if(outputController == null) {
             System.out.println("Init OutputController first!");
             return;
         }
         Platform.runLater(() -> {
-            if(!texts.isEmpty()) {
-                texts.forEach(text -> {
+            if(texts.length > 0) {
+                Arrays.stream(texts).forEach(text -> {
                     if (!text.getText().isEmpty()) {
                         outputController.getTextHistory().add(text);
                         outputController.updateStackPane();
@@ -59,4 +59,5 @@ public class Cout {
     public static void cout(String text) {
         cout(text, ApplicationInit.textColor);
     }
+
 }

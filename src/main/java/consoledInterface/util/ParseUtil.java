@@ -34,7 +34,7 @@ public class ParseUtil {
                     latch.countDown();
 
                 } catch (NumberFormatException e) {
-                    cout("Please enter a valid digit!", ApplicationInit.textColor); // Сообщение об ошибке
+                    cout("\nPlease enter a valid digit!\n", ApplicationInit.textColor); // Сообщение об ошибке
                 }
             } while (shouldKeepCycle.get());
         });
@@ -57,7 +57,7 @@ public class ParseUtil {
                     ConcurrentUtil.awaitTillCinIsActive(latch, cin);
 
                     if (temp > maxValue || temp < minValue) {
-                        cout("Please enter a digit lower than " + maxValue + " and bigger than " + minValue + "!", ApplicationInit.textColor);
+                        cout("\nPlease enter a digit lower than " + maxValue + " and bigger than " + minValue + "!\n", ApplicationInit.textColor);
                     } else {
                         atomicInteger.set(temp);
                         shouldKeepCycle.set(false);
@@ -65,7 +65,7 @@ public class ParseUtil {
                     }
                 } catch (NumberFormatException e) {
 
-                    cout("Please enter a valid digit!", ApplicationInit.textColor); // Сообщение об ошибке
+                    cout("\nPlease enter a valid digit!\n", ApplicationInit.textColor); // Сообщение об ошибке
                 }
             } while (shouldKeepCycle.get());
         });
@@ -96,7 +96,7 @@ public class ParseUtil {
 
                 return temp; // Возвращаем число, если все в порядке
             } catch (NumberFormatException e) {
-                cout("Please enter a valid digit!", ApplicationInit.textColor); // Сообщение об ошибке
+                cout("\nPlease enter a valid digit!\n", ApplicationInit.textColor); // Сообщение об ошибке
             }
 
         } while (true);
@@ -117,7 +117,7 @@ public class ParseUtil {
 
                 } catch (NumberFormatException e) {
 
-                    cout("Please enter a valid digit!", ApplicationInit.textColor); // Сообщение об ошибке
+                    cout("\nPlease enter a valid digit!\n", ApplicationInit.textColor); // Сообщение об ошибке
                 }
             } while (shouldKeepCycle.get());
         });

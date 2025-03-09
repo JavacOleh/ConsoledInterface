@@ -31,5 +31,6 @@ public class System {
 
         cout("Press any key to continue...", ApplicationInit.textColor);
         inputController.getCin().getLine();
+        cout("\n");
     }
 }
