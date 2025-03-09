@@ -64,13 +64,6 @@ public class ApplicationInit extends Application {
         launch();
     }
 
-    private static void interruptAllThreads() {
-        registerThreads().forEach(s -> {
-            if(s.isAlive())
-                s.interrupt();
-        });
-    }
-
     public static void onClose() {
         if(theStage == null) {
             System.out.println("theStage is null!!");
@@ -87,11 +80,25 @@ public class ApplicationInit extends Application {
         System.exit(130);
     }
 
+    private static void interruptAllThreads() {
+        var registeredThreads = registerThreads();
+
+        if (registeredThreads.isEmpty()) return;
+
+        registeredThreads.forEach(s -> {
+            if(s.isAlive())
+                s.interrupt();
+        });
+    }
+
     private static void interruptAllExecutorServices() {
         ArrayList<ExecutorService> executorServices = registerExecutorServices();
+
+        if(executorServices.isEmpty()) return;
+
         executorServices.forEach(s -> {
             if(!s.isTerminated()) {
-                s.shutdownNow();
+                s.shutdown();
                 try {
                     // Ожидаем завершения всех задач
                     if (!s.awaitTermination(30, TimeUnit.MILLISECONDS)) {
@@ -111,7 +118,7 @@ public class ApplicationInit extends Application {
 
     public static ArrayList<ExecutorService> registerExecutorServices() {
         var executorServices = new ArrayList<ExecutorService>();
-        executorServices.add(ioController.getInputController().getCin().getExecutorService());
+        //executorServices.add(ioController.getInputController().getCin().getExecutorService());
         //executorServices.add(ioController.getTaskExectuor().getExecutorService());
 
         return executorServices;
